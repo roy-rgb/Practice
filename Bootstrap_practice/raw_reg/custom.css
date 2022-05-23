@@ -1,0 +1,15 @@
+
+
+.banner{
+    background: url(img/banner.jpg);
+    background-size: cover;
+    height: 550px;
+    background-attachment: fixed;
+}
+
+.space-between{
+    min-height:10px;
+}
+.mainoption{
+    min-height: 550px !important;
+}

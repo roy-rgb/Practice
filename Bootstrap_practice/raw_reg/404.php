@@ -1,0 +1,5 @@
+<?php
+
+ echo "SOMETHINS IS NOT WORKING CHECK YOUR INPUTS!!!";
+
+?>
