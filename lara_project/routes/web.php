@@ -43,8 +43,32 @@ Route::post('/attend/modal', 'AttendController@showModal')->name('attend.modalSh
 Route::get('/details', 'AttendController@showDetails')->name('attend.detailsShow');
 Route::post('/findDate', 'AttendController@findDate')->name('attend.date');
 Route::post('/findTime', 'AttendController@findTime')->name('attend.time');
-
 Route::post('/addRow', 'AttendController@addRow')->name('attend.addRow');
+
+////////REPORT/////////////////////
+Route::get('/report', 'AttendController@showReport')->name('reportShow');
+Route::post('/reportSearch', 'AttendController@searchReportData')->name('reportSearch');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

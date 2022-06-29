@@ -114,6 +114,7 @@ class EmpController extends Controller {
 
         $id = $request->id;
         $status = $request->status;
+
         //$btn= $request->btn;
         $sat = !empty($status) ? '0' : '1';
 

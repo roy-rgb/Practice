@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
+<<<<<<< HEAD
+            <name>ajax</name>
+=======
             <name>laravel</name>
+>>>>>>> b09c9c0... init
         </data>
     </configuration>
 </project>

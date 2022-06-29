@@ -73,11 +73,18 @@
                                 <p>Attend List</p>
                             </a>
                         </li>
-                        
+
                          <li class="nav-item">
                             <a href="{{route('attend.detailsShow')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Attend Details</p>
+                            </a>
+                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('reportShow')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Report</p>
                             </a>
                         </li>
 

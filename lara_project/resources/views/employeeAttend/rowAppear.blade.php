@@ -1,13 +1,11 @@
-<table id="tableData" class="table delRow text-dark container">
-    <tbody>
-        <tr>
-            <td>
-                <div class="input-group mb-3 serial font-weight-bold h3 text-center" serial="{{ $i }}" name="serial" id="serial">
+<div class="row  delRow text-dark">
+            <div class="col">
+                <div class="input-group mb-3 serial font-weight-bold text-align-center" serial="{{ $i }}" name="serial" id="serial">
                             {{ $i }}
                 </div>
 
-            </td>
-            <td>
+            </div>
+            <div class="col">
 
                 <div class="input-group mb-3">
                     <div class="input-group mb-3">
@@ -17,27 +15,23 @@
                     </div>
                 </div>
 
-            </td>
+            </div>
 
-            <td>
+            <div class="col">
                 <div class="input-group mb-3" id="date">
                     <input name="date" type="date" class="form-control">
                 </div>
-            </td>
+            </div>
 
-            <td>
+            <div class="col">
                 <div class="input-group mb-3" id="time">
                     <input name="time" type="time" class="form-control">
                 </div>
-            </td>
+            </div>
 
-            <td> <button type="button" style="background-color:red;" class="addRow drop btn btn-warning text-light"><i
+            <div class="col  ml-4"> <button type="button" style="background-color:red;" class="addRow drop btn btn-warning text-light"><i
                         class="fa-solid fa-xmark"></i>&nbsp;Drop</button>
-            </td>
-
-        </tr>
+            </div>
 
 
-    </tbody>
-
-</table>
+        </div>

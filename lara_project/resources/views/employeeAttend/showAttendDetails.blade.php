@@ -1,69 +1,76 @@
 @extends('layout.master')
 @section('content')
-    <table id="tableData" class="table delRow text-dark container">
-        <thead>
-            <tr>
-                <th>Serial</th>
-                <th scope="col">Employee Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="input-group mb-3  text-center serial font-weight-bold  h3" name="serial"
-                        serial="{{ $i }}" id="serial">
-                        {{ $i }}
-                    </div>
+    <div id="tableData" class="delRow text-dark container">
 
-                </td>
-                <td>
+        <div class="row table p-2 text-center table-dark">
+            <div class="col">Serial</div>
+            <div class="col">Employee Name</div>
+            <div class="col">Date</div>
+            <div class="col">Time</div>
+            <div class="col">Action</div>
+        </div>
 
+
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3 text-align-center serial font-weight-bold" name="serial"
+                    serial="{{ $i }}" id="serial">
+                    {{ $i }}
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="input-group mb-3">
                     <div class="input-group mb-3">
-                        <div class="input-group mb-3">
-                            {!! Form::open() !!}
-                            {{ Form::select('first_name', $details, null, ['class' => 'save-data form-select  w-100 p-2 ', 'id' => 'employee', 'name' => 'employee', 'placeholder' => 'Please select ...']) }}
-                            {!! Form::close() !!}
-                        </div>
+                        {!! Form::open() !!}
+                        {{ Form::select('first_name', $details, null, ['class' => 'save-data form-select  w-100 p-2 ', 'id' => 'employee', 'name' => 'employee', 'placeholder' => 'Please select ...']) }}
+                        {!! Form::close() !!}
                     </div>
+                </div>
 
-                </td>
+            </div>
 
-                <td>
-                    <div class="input-group mb-3" id="date">
-                        <input name="date" type="date" class="form-control">
-                    </div>
-                </td>
+            <div class="col">
+                <div class="input-group mb-3" id="date">
+                    <input name="date" type="date" class="form-control">
+                </div>
+            </div>
 
-                <td>
-                    <div class="input-group mb-3" id="time">
-                        <input name="time" type="time" class="form-control">
-                    </div>
-                </td>
+            <div class="col">
+                <div class="input-group mb-3" id="time">
+                    <input name="time" type="time" class="form-control">
+                </div>
+            </div>
 
-                <td> <button type="button" class="addRow plus btn btn-success text-light"><i
-                            class="fa-solid fa-plus"></i>&nbsp;Add</button>
-                </td>
+            <div class="col ml-4"> <button type="button" class="addRow plus btn btn-success text-light"><i
+                        class="fa-solid  fa-plus"></i>&nbsp;Add</button>
+            </div>
 
-            </tr>
+        </div>
 
-
-
-        </tbody>
-
-    </table>
-    <div id="newRow">
+        <div id="newRow">
+        </div>
 
     </div>
 
     <script>
-        /*$(".save-data").each(function () {
-                                                var employeeId = $(this).val();
-                                                var options = $("#employee option[value='" + employeeId + "']");
-                                                //options.attr('disabled', 'true');
-                                            });*/
+        var check = [];
+        $('select option').removeAttr('disabled');
+
+        $(" select.save-data option:selected").each(function() {
+            if ($(this).val() != '0') {
+                var optionId = $(this).val();
+                check.push(optionId);
+            }
+
+        });
+
+
+        $(" select.save-data option").each(function() {
+
+            $(this).attr('disabled', $.inArray($(this).val(), check) > -1 && !$(this).is(":selected"));
+        });
 
 
 
@@ -72,51 +79,22 @@
         $(document).on('change', '.save-data', function() {
             var check = [];
             $('select option').removeAttr('disabled');
-            // var val = $(this).attr('id');
-            //  var val = $(this).val();
-            //  if(employee!=''){
-            // var val = $('.save-data').find(":selected").val();
-            //        //var value =  $(".save-data option: selected");
-            //        alert(val);
-            //  alert(val);
-            //        // }
-            //        if (val != '') {
-            //            var options = $(".delRow option[value='" + val + "']");
-            //            options.attr('disabled', 'true');
-            //        }
 
             $(" select.save-data option:selected").each(function() {
-                //var value = $(this).val();
-                //console.log(value);
-                //  var kal = $(this).find(":selected").val();
-
                 if ($(this).val() != '0') {
                     var optionId = $(this).val();
                     check.push(optionId);
                 }
-                // check.push(value);
-                // console.log(check);
-                //console.log(check.toString());
+
             });
 
 
             $(" select.save-data option").each(function() {
-                // var kal = $(this).find(":selected").val();
-                // console.log(kal);
-                // var options = $("#employee option[value='" + employeeId + "']");
-                // if (jQuery.inArray(kal, check)) {
-                //      options.prop('disabled', 'true');
-                //  }
-                $(this).attr('disabled', $.inArray($(this).val(), check) > -1 && !$(
-                    this).is(":selected"));
+
+                $(this).attr('disabled', $.inArray($(this).val(), check) > -1 && !$(this).is(":selected"));
             });
 
         });
-
-
-
-
-
 
         $(document).on('click', '.plus', function() {
 
@@ -142,35 +120,23 @@
                 success: function(res) {
                     toastr.success(res.msg);
                     $('#newRow').append(res.html);
-                    // var kal = $('.save-data').find(":selected").val();
-                    // check.push(kal);
-                    // console.log(check.toString());
+
                     $(".serial").text(res.serial);
 
                     $(" select.save-data option:selected").each(function() {
-                        //var value = $(this).val();
-                        //console.log(value);
-                        //  var kal = $(this).find(":selected").val();
+
 
                         if ($(this).val() != '0') {
                             var optionId = $(this).val();
                             check.push(optionId);
                         }
-                        // check.push(value);
-                        // console.log(check);
-                        //console.log(check.toString());
+
                     });
 
 
                     $(" select.save-data option").each(function() {
-                        // var kal = $(this).find(":selected").val();
-                        // console.log(kal);
-                        // var options = $("#employee option[value='" + employeeId + "']");
-                        // if (jQuery.inArray(kal, check)) {
-                        //      options.prop('disabled', 'true');
-                        //  }
-                        $(this).attr('disabled', $.inArray($(this).val(), check) > -1 && !$(
-                            this).is(":selected"));
+
+                        $(this).attr('disabled', $.inArray($(this).val(), check) > -1 && !$(this).is(":selected"));
                     });
 
                 }
