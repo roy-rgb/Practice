@@ -142,46 +142,73 @@ class AttendController extends Controller
 
     public function showReport(Request $request)
     {
-
-        //     <select id="year" class="col-2 h4"  name="year">
-        //     <option value="">year</option>
-        //     {{ $year = date('Y') }}
-        //     @for ($year = 2020; $year <= 2022; $year++)
-        //     <option value="{{ $year }}">{{ $year }}</option>
-        //     @endfor
-        //    </select>
-
+        $dayArr = [];
+        $empList = [];
+        $attendList = [];
         $year = array();
         for ($i = 2020; $i <= 2022; $i++) {
             $year[$i] = $i;
         }
 
         $month = $this->month;
-        $details = Employee::all();
 
-        if (!empty($request->key)) {
-            $range = $request->key;
-            return view('employeeAttend.report', compact('year', 'month', 'details', 'range'));
-        } elseif (empty($request->key)) {
-            $range = "";
-            return view('employeeAttend.report', compact('year', 'month', 'details', 'range'));
+        if ($request->generate == 'true') {
+
+            $ryear = !empty($request->year) ? $request->year : "";
+            $rmonth = !empty($request->month) ? $request->month : "";
+
+            $date = $ryear . '-' . $rmonth . '-01';
+            $lDay = date("t", strtotime($date));
+
+            for ($i = 01; $i <= $lDay; $i++) {
+                $day = str_pad($i, 2, '0', STR_PAD_LEFT);
+                $dayArr[$i] = $day;
+            }
+
+            // echo"<pre>";
+            // print_r($dayArr);
+            // exit;
+
+            $details = Employee::all();
+            foreach ($details as $key => $value) {
+                $empList[$value->id] = $value->first_name . " " . $value->last_name;
+            }
+
+            $data = Attend::select('employee_id', DB::raw(" DAY(date) as day"))->get();
+
+            foreach ($data as $kkey => $vvalue) {
+                $attendList[$vvalue->employee_id][$vvalue->day] = $vvalue->day;
+            }
+
+            //  echo "<pre>";
+            //  print_r($attendList);
+            //  exit;
+
         }
+        return view('employeeAttend.report', compact('year', 'month', 'attendList', 'empList', 'dayArr'));
+
+        // $details = Employee::all();
+        // if (!empty($request->key)) {
+        //     $range = $request->key;
+        //     return view('employeeAttend.report', compact('year', 'month', 'details', 'range'));
+        // } elseif (empty($request->key)) {
+        //     $range = "";
+        //     return view('employeeAttend.report', compact('year', 'month', 'details', 'range'));
+        // }
     }
 
     public function searchReportData(Request $request)
     {
         $month = $request->month;
-
-        $range = '';
-
-        if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
-            $range = '31';
-        } elseif ($month == '02') {
-            $range = '28';
-        } elseif ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
-            $range = '28';
-        }
-        $url = url("/report?key=" . $range);
+        $year = $request->year;
+        // if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
+        //     $range = '31';
+        // } elseif ($month == '02') {
+        //     $range = '28';
+        // } elseif ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
+        //     $range = '28';
+        // }
+        $url = url("/report?generate=true&month=" . $month . "&year=" . $year);
         return redirect($url);
     }
 }

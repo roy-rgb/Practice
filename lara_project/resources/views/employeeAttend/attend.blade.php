@@ -7,15 +7,15 @@
     @method('post')
     <div class="container">
         <div class="tbl-handle table-sm ">
-            <table class=" table  bgm table-striped table-hover table-light text-secondary font-weight-bold " id="pk" >
+            <table class=" table  bgm table-striped table-hover table-light text-secondary font-weight-bold " id="pk">
                 <thead class="bg-secondary text-warning">
                     <tr>
                         <th>
                             <label class="text-warning">
-                                <input id="selectCheckAll" class="check" type="checkbox"/>
-                                Check All</label> 
-                        </th> 
-<!--                        <th  rowspan="2">Check</th>-->
+                                <input id="selectCheckAll" class="check" type="checkbox" />
+                                Check All</label>
+                        </th>
+                        <!--                        <th  rowspan="2">Check</th>-->
                         <th>Employee</th>
                         <th class="text-center">Date</th>
                         <th class="text-center">Time</th>
@@ -36,20 +36,23 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input name="employee_id[{{$row->id}}]" type="checkbox" data-id="{{$row->id}}" class="custom-control-input emp-check" id="{{$row->id}}" value="{{$row->id}}">
-                                <label class="custom-control-label" for="{{$row->id}}">{{  $serial++ }}</label>
+                                <input name="employee_id[{{$row->id}}]" type="checkbox" data-id="{{$row->id}}"
+                                    class="custom-control-input emp-check" id="{{$row->id}}" value="{{$row->id}}">
+                                <label class="custom-control-label" for="{{$row->id}}">{{ $serial++ }}</label>
                             </div>
                         </td>
 
                         <td> {{$row->first_name}} </td>
 
-                        <td class="text-center" > 
+                        <td class="text-center">
 
-                            Date: <input type="date" name="date[{{$row->id}}]" id="date_{{$row->id}}" class=" date-time" autocomplete="off" disabled> 
+                            Date: <input type="date" name="date[{{$row->id}}]" id="date_{{$row->id}}" class=" date-time"
+                                autocomplete="off" disabled>
                         </td>
 
-                        <td class="text-center">  
-                            Time: <input type="time" class="date-time " name="time[{{$row->id}}]" id="time_{{$row->id}}" disabled> 
+                        <td class="text-center">
+                            Time: <input type="time" class="date-time " name="time[{{$row->id}}]" id="time_{{$row->id}}"
+                                disabled>
                         </td>
 
 
@@ -75,7 +78,6 @@
     </div>
 </form>
 <script>
-
     $(document).ready(function () {
         $('#pk').DataTable({
             'sort': false,

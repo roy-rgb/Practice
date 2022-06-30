@@ -17,6 +17,7 @@
     <div class="mb-5"></div>
 
 
+    @if(Request::get('generate')=='true')
     <div class="report-container">
 
         <table class="table table-bordered table-responsive-sm">
@@ -26,29 +27,45 @@
 
                 <tr>
                     <th>Employee Name</th>
+                    @php
+                    if(!empty($dayArr)){
+                    foreach($dayArr as $dI => $day){
+                    @endphp
 
+                    <th> {{ $day }}</th>
 
-                    @php for($i=1;$i<=$range;$i++){ @endphp <th>
-                        @php echo $i; @endphp
-                        </th>
-                        @php }@endphp
+                    @php }} @endphp
 
                 </tr>
 
             </thead>
 
-            @php
-            foreach($details as $row ){
-            @endphp
 
             <tbody>
+                @php
+                if(!empty($empList)){
+                foreach($empList as $empId => $emp){
+                @endphp
                 <tr>
-                    <td>{{ $row->first_name }}</td>
-                </tr>
+                    <td>{{ $emp }} </td>
 
+                    @php
+                    if(!empty($dayArr)){
+                    foreach($dayArr as $dI => $day){
+                    @endphp
+
+                    <td>
+                        @php echo !empty($empId) && !empty($attendList[$empId][$day]) ? 'P' : '.'; @endphp
+                    </td>
+                    @php }} @endphp
+                </tr>
+                @php }} @endphp
             </tbody>
-            @php } @endphp
+
+
         </table>
     </div>
+    @endif
+
 </div>
 @endsection
