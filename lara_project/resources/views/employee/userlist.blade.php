@@ -8,16 +8,12 @@
                 <th>Serial</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Address</th> 
-                <th>Gender</th>   
-                <th>Status</th>     
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Status</th>
                 <th>Status Change</th>
                 <th>Image</th>
-
-
-
-
-                <td colspan="2"><b>Action</b></td>   
+                <td colspan="2"><b>Action</b></td>
             </tr>
         </thead>
 
@@ -34,12 +30,12 @@
                 <td> {{ $serial++ }}  </td>
                 <td> {{$row->first_name}} </td>
                 <td>  {{ $row->last_name }}  </td>
-                <td>  
+                <td>
                     {{ $row->address }}
 
                 </td>
 
-                <td id="btn-gender{{$row->id}}"> {{ ($row->gender == '1') ? 'Male' : ' Female' }}   </td> 
+                <td id="btn-gender{{$row->id}}"> {{ ($row->gender == '1') ? 'Male' : ' Female' }}   </td>
 
                 <td id="btnStatus_{{$row->id}}"> {{($row->status == '0') ? 'Inactive' : ' Active' }}</td>
 
@@ -49,7 +45,7 @@
                     <img src="{!! asset('public/uploads/' . $row->image) !!}" alt="Smiley face" width="70" height="42" style="border:2px solid white">
                 </td>
 
-                <td>     
+                <td>
                     <a  href="{{ route('userEdit', $row->id)}}"> <button class="bg-info" > <i class="fa-solid fa-edit"></i> </button> </a> </td>
                 <td>
                     <a  href="{{ route('userDestroy', $row->id)}}"onclick="return confirm('Are you sure to Delete?')"> <button class="bg-danger"><i class="fa-solid fa-trash-can"></i></button> </a>

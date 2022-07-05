@@ -24,23 +24,25 @@
         <!-- Summernote -->
          <script src="{{ asset('public/plugins/daterangepicker/daterangepicker.js') }}"></script>
         <script src="{{ asset('public/plugins/summernote/summernote-bs4.min.js') }}"></script>
-       
+
         <!-- Toastr -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <!-- overlayScrollbars -->
         <script src="{{ asset('public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('public/dist/js/adminlte.js') }}"></script>
+
+        <script src="{{ asset('public/dist/js/printThis.js') }}"></script>
         <!-- AdminLTE for demo purposes -->
-       
+
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{ asset('public/dist/js/pages/dashboard.js') }}"></script>
-        
+
 <!--       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>-->
         <!-- Jquery support for datePicker -->
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!--
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
-        
+
 

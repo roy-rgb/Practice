@@ -45,9 +45,8 @@
                         <td> {{$row->first_name}} </td>
 
                         <td class="text-center">
-
                             Date: <input type="date" name="date[{{$row->id}}]" id="date_{{$row->id}}" class=" date-time"
-                                autocomplete="off" disabled>
+                            autocomplete="off" disabled>
                         </td>
 
                         <td class="text-center">
@@ -112,13 +111,6 @@
             }
 
         });
-
-
-
-
-
-
-
 
     });
 

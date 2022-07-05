@@ -43,7 +43,10 @@
 
         <!--        bootstrap datepicker-->
         <!--       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" />-->
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="{{ asset('public/dist/js/printThis.js') }}"></script>
         <!-- Jquery support for datePicker -->
         <link rel="stylesheet" href="{{ asset('public/dist/css/jquery-ui.css') }}">
 <!--        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

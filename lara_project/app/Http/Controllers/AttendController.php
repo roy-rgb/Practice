@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Employee;
 use App\Attend;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\PDF;
+
 use Illuminate\Support\Facades\DB;
 
 class AttendController extends Controller
@@ -93,7 +95,6 @@ class AttendController extends Controller
     {
 
         $i = 1;
-
         $details = $this->getdetails();
         return view('employeeAttend.showAttendDetails', compact('details', 'i'));
         //      $url = url("/addRow");
@@ -142,6 +143,8 @@ class AttendController extends Controller
 
     public function showReport(Request $request)
     {
+        $ryear = "";
+        $rmonth = "";
         $dayArr = [];
         $empList = [];
         $attendList = [];
@@ -165,27 +168,42 @@ class AttendController extends Controller
                 $dayArr[$i] = $day;
             }
 
-            // echo"<pre>";
-            // print_r($dayArr);
-            // exit;
 
-            $details = Employee::all();
-            foreach ($details as $key => $value) {
-                $empList[$value->id] = $value->first_name . " " . $value->last_name;
-            }
+            $empList = Employee::select(DB::raw("CONCAT(first_name, ' ' , last_name) as name"), 'id')
+                ->pluck('name', 'id')->toArray();
 
-            $data = Attend::select('employee_id', DB::raw(" DAY(date) as day"))->get();
+
+            $data = Attend::select('employee_id', DB::raw(" DAY(date) as day"))
+                ->where(DB::raw("YEAR(date)"), $ryear)
+                ->where(DB::raw("MONTH(date)"), $rmonth)
+                ->get();
+
+                // echo"<pre>";
+                // print_r($data);
+                // exit;
+
 
             foreach ($data as $kkey => $vvalue) {
-                $attendList[$vvalue->employee_id][$vvalue->day] = $vvalue->day;
+                $date = str_pad($vvalue->day, 2, '0', STR_PAD_LEFT);
+
+                $attendList[$vvalue->employee_id][$date] = $date;
             }
 
-            //  echo "<pre>";
-            //  print_r($attendList);
-            //  exit;
-
         }
-        return view('employeeAttend.report', compact('year', 'month', 'attendList', 'empList', 'dayArr'));
+
+        // return $request->download;
+        if ($request->download == 'pdf') {
+            $pdf = PDF::loadView('employeeAttend.invoice', compact('year', 'month', 'ryear', 'rmonth', 'attendList', 'empList', 'dayArr'));
+            return $pdf->stream();
+        } elseif ($request->document == 'print') {
+            return view('employeeAttend.invoice', compact('year', 'month', 'ryear', 'rmonth', 'attendList', 'empList', 'dayArr'));
+        } else {
+            return view('employeeAttend.report', compact('year', 'month', 'ryear', 'rmonth', 'attendList', 'empList', 'dayArr'));
+        }
+
+
+
+        // return view('employeeAttend.report', compact('year', 'month','ryear','rmonth', 'attendList', 'empList', 'dayArr'));
 
         // $details = Employee::all();
         // if (!empty($request->key)) {
